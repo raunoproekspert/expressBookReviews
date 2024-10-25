@@ -11,7 +11,7 @@ public_users.post("/register", (req,res) => {
     console.log("Username or password is missing");
     return res.status(400).json({"message": "Username or password is missing"});
   }
-  if (users.anfilter((dbUser) => dbUser.username === user.username).length > 0) {
+  if (users.filter((dbUser) => dbUser.username === user.username).length > 0) {
     console.log(`User ${user.username} already exists.`);
     return res.status(400).json({"message": "User already exists."});
   }
