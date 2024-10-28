@@ -1,5 +1,6 @@
 const express = require('express');
 let books = require("./booksdb.js");
+const { default: axios } = require('axios');
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
@@ -81,4 +82,34 @@ public_users.get('/review/:isbn',function (req, res) {
     return res.send(books[isbn].reviews);
 });
 
+// task 10
+const getBooks = (booksApiUrl) => {
+    return axios.get(`${booksApiUrl}/`)
+    .then((response) => {console.log(response.data)});
+};
+
+// task 11
+const getBookDetailsByIsbn = (booksApiUrl, isbn) => {
+    return axios.get(`${booksApiUrl}/isbn/${isbn}`)
+    .then((response) => {console.log(response.data)});
+};
+
+// task 12
+const getBookDetailsByAuthor = (booksApiUrl, author) => {
+    return axios.get(`${booksApiUrl}/author/${author}`)
+    .then((response) => {console.log(response.data)});
+};
+
+// task 13
+const getBookDetailsByTitle = (booksApiUrl, title) => {
+    axios.get(`${booksApiUrl}/title/${title}`)
+    .then((response) => {console.log(response.data)});
+};
+
+
 module.exports.general = public_users;
+module.exports.getBooks = getBooks;
+module.exports.getBookDetailsByIsbn = getBookDetailsByIsbn;
+module.exports.getBookDetailsByAuthor = getBookDetailsByAuthor;
+module.exports.getBookDetailsByTitle = getBookDetailsByTitle;
+
